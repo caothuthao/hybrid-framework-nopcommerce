@@ -1,42 +1,47 @@
 package com.nopcommerce.user;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Random;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BasePage;
 import commons.BaseTest;
-import pageObjects.HomePageObject;
-import pageObjects.RegisterPageObject;
+import pageFactory.HomePageObject;
+import pageFactory.RegisterPageObject;
 
-public class Level_03_Base_Object_Pattern_01_Register extends BaseTest {
+public class Level_05_Page_Factory extends BaseTest {
 	private WebDriver driver;
 	
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
-	
-	String projectPath = System.getProperty("user.dir");
+		
+	String existingEmail;
+	String password;
+	String notFoundEmail;
+	String invalidEmail;
 	
 	Select select;
 	WebDriverWait explicitWait;
 	BasePage basePage;
 
+	@Parameters({"browser","url"})
 	@BeforeClass
-	public void beforeClass() {
-		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
-		driver = new FirefoxDriver();
-		basePage = new BasePage();
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	public void beforeClass(String browserName, String urlValue) {
+		driver = getBrowserDriver(browserName, urlValue);
 		
-		// 1 - Mở url ra --> mở ra trang Home Page (Business Page)
-		driver.get("https://demo.nopcommerce.com/");
+		basePage = new BasePage();
+		
+		existingEmail = generateRandomEmail();
+		password = "123456";
+		notFoundEmail = generateRandomEmail();
+		invalidEmail = "thao@123..";
 		
 		// Khởi tạo page lên
 		homePage = new HomePageObject(driver);
@@ -65,7 +70,7 @@ public class Level_03_Base_Object_Pattern_01_Register extends BaseTest {
 		
 		registerPage.sendKeyToFirstNameTextBox("Cao");
 		registerPage.sendKeyToLastNameTextBox("Thu Thao");
-		registerPage.sendKeyToEmailTextBox("thao");
+		registerPage.sendKeyToEmailTextBox(invalidEmail);
 		registerPage.sendKeyToPasswordTextBox("123456");
 		registerPage.sendKeyToConfirmPasswordTextBox("123456");
 		
@@ -81,7 +86,7 @@ public class Level_03_Base_Object_Pattern_01_Register extends BaseTest {
 		
 		registerPage.sendKeyToFirstNameTextBox("Cao");
 		registerPage.sendKeyToLastNameTextBox("Thu Thao");
-		registerPage.sendKeyToEmailTextBox("thao784573@gmail.com");
+		registerPage.sendKeyToEmailTextBox(existingEmail);
 		registerPage.sendKeyToPasswordTextBox("123456");
 		registerPage.sendKeyToConfirmPasswordTextBox("123456");
 		
@@ -102,7 +107,7 @@ public class Level_03_Base_Object_Pattern_01_Register extends BaseTest {
 		
 		registerPage.sendKeyToFirstNameTextBox("Automation");
 		registerPage.sendKeyToLastNameTextBox("FC");
-		registerPage.sendKeyToEmailTextBox("thao784573@gmail.com");
+		registerPage.sendKeyToEmailTextBox(existingEmail);
 		registerPage.sendKeyToPasswordTextBox("123456");
 		registerPage.sendKeyToConfirmPasswordTextBox("123456");
 		
@@ -118,7 +123,7 @@ public class Level_03_Base_Object_Pattern_01_Register extends BaseTest {
 		
 		registerPage.sendKeyToFirstNameTextBox("Automation");
 		registerPage.sendKeyToLastNameTextBox("FC");
-		registerPage.sendKeyToEmailTextBox("thao@gmail.com");
+		registerPage.sendKeyToEmailTextBox(notFoundEmail);
 		registerPage.sendKeyToPasswordTextBox("1234");
 		registerPage.sendKeyToConfirmPasswordTextBox("1234");
 		
@@ -134,7 +139,7 @@ public class Level_03_Base_Object_Pattern_01_Register extends BaseTest {
 		
 		registerPage.sendKeyToFirstNameTextBox("Automation");
 		registerPage.sendKeyToLastNameTextBox("FC");
-		registerPage.sendKeyToEmailTextBox("thao@gmail.com");
+		registerPage.sendKeyToEmailTextBox(notFoundEmail);
 		registerPage.sendKeyToPasswordTextBox("123456");
 		registerPage.sendKeyToConfirmPasswordTextBox("123457");
 		
@@ -146,6 +151,11 @@ public class Level_03_Base_Object_Pattern_01_Register extends BaseTest {
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
+	}
+	
+	public String generateRandomEmail() {
+		Random random = new Random();
+		return "thao" + random.nextInt(1000) + "@gmail.com";
 	}
 
 }

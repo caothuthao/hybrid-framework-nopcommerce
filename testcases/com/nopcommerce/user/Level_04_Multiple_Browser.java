@@ -145,7 +145,7 @@ public class Level_04_Multiple_Browser extends BaseTest {
 		
 		registerPage.clickToRegisterButton();
 		
-		Assert.assertEquals(registerPage.getConfirmPaswordErrorMessage(), "The password and confirmation password do not match.");
+		Assert.assertEquals(registerPage.getConfirmPasswordErrorMessage(), "The password and confirmation password do not match.");
 	}
 
 	@AfterClass

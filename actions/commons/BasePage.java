@@ -20,6 +20,10 @@ public class BasePage {
 	
 	private long longTimeout = 50;
 	
+	public static BasePage getBasePage() {
+		return new BasePage();
+	}
+	
 	/* Web Browser */
 	public void openUrl(WebDriver driver, String url) {
 		driver.get(url);

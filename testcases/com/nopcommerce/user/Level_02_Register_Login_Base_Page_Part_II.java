@@ -1,22 +1,19 @@
 package com.nopcommerce.user;
 
-import org.testng.annotations.Test;
-
-import commons.BasePage;
-
-import org.testng.annotations.BeforeClass;
-
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import commons.BasePage;
 
 public class Level_02_Register_Login_Base_Page_Part_II {
 	WebDriver driver;
@@ -25,15 +22,13 @@ public class Level_02_Register_Login_Base_Page_Part_II {
 	
 	Select select;
 	WebDriverWait explicitWait;
-	BasePage basePage;
+	BasePage basePage = BasePage.getBasePage();
 
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		driver = new FirefoxDriver();
 		
-		basePage = new BasePage();
-
 		emailAddress = "afc" + generateFakeNumber() + "@mail.vn";
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	}

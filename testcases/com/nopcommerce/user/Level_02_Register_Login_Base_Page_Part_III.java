@@ -1,55 +1,49 @@
 package com.nopcommerce.user;
 
-import org.testng.annotations.Test;
-
-import commons.BasePage;
-
-import org.testng.annotations.BeforeClass;
-
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
-public class Level_02_Register_Login_Base_Page_Part_III {
+import commons.BasePage;
+
+public class Level_02_Register_Login_Base_Page_Part_III extends BasePage {
 	WebDriver driver;
 	String emailAddress;
 	String projectPath = System.getProperty("user.dir");
 	
 	Select select;
 	WebDriverWait explicitWait;
-	BasePage basePage;
 
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		driver = new FirefoxDriver();
 		
-		basePage = new BasePage();
-
 		emailAddress = "afc" + generateFakeNumber() + "@mail.vn";
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	}
 
 	@Test
 	public void TC_01_Register_Empty_Data() {
-		basePage.openUrl(driver, "https://demo.nopcommerce.com/");
+		openUrl(driver, "https://demo.nopcommerce.com/");
 
-		basePage.clickToElement(driver, "//a[@class='ico-register']");
-		basePage.clickToElement(driver, "//button[@id='register-button']");
+		clickToElement(driver, "//a[@class='ico-register']");
+		clickToElement(driver, "//button[@id='register-button']");
 		
-		Assert.assertEquals(basePage.getElementText(driver, "//span[@id='FirstName-error']"), "First name is required.");
-		Assert.assertEquals(basePage.getElementText(driver, "//span[@id='LastName-error']"), "First name is required.");
-		Assert.assertEquals(basePage.getElementText(driver, "//span[@id='Email-error']"), "First name is required.");
-		Assert.assertEquals(basePage.getElementText(driver, "//span[@id='Password-error']"), "First name is required.");
-		Assert.assertEquals(basePage.getElementText(driver, "//span[@id='ConfirmPassword-error']"), "First name is required.");
+		Assert.assertEquals(getElementText(driver, "//span[@id='FirstName-error']"), "First name is required.");
+		Assert.assertEquals(getElementText(driver, "//span[@id='LastName-error']"), "First name is required.");
+		Assert.assertEquals(getElementText(driver, "//span[@id='Email-error']"), "First name is required.");
+		Assert.assertEquals(getElementText(driver, "//span[@id='Password-error']"), "First name is required.");
+		Assert.assertEquals(getElementText(driver, "//span[@id='ConfirmPassword-error']"), "First name is required.");
 	}
 
 	@Test

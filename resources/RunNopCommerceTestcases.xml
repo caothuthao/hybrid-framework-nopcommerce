@@ -6,11 +6,11 @@
   <test name="Run on FIREFOX">
   	<parameter name ="browser" value ="firefox"></parameter>
     <classes>
-      <class name="com.nopcommerce.user.Level_04_Multiple_Browser"/>
+      <class name="com.nopcommerce.user.Level_05_Page_Factory"/>
     </classes>
   </test>
 
-  <test name="Run on CHROME">
+ <!--  <test name="Run on CHROME">
   	<parameter name ="browser" value ="chrome"></parameter>
     <classes>
       <class name="com.nopcommerce.user.Level_04_Multiple_Browser"/>
@@ -22,6 +22,6 @@
     <classes>
       <class name="com.nopcommerce.user.Level_04_Multiple_Browser"/>
     </classes>
-  </test> 
+  </test>  -->
   
 </suite> 
