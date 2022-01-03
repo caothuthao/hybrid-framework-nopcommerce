@@ -60,7 +60,7 @@ public class Level_03_Base_Object_Pattern_02_Login extends BaseTest {
 		registerPage.sendKeyToConfirmPasswordTextBox(password);
 		
 		registerPage.clickToRegisterButton();
-		Assert.assertEquals(registerPage.getEmailSuccessMessage(), "Your registration completed");
+		Assert.assertEquals(registerPage.getRegisterSuccessMessage(), "Your registration completed");
 		registerPage.clickToLogoutLink();
 		
 		// 3 - Từ trang Register --> Home Page

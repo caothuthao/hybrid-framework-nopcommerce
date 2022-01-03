@@ -87,7 +87,7 @@ public class Level_03_Base_Object_Pattern_01_Register extends BaseTest {
 		
 		registerPage.clickToRegisterButton();
 		
-		Assert.assertEquals(registerPage.getEmailSuccessMessage(), "Your registration completed");
+		Assert.assertEquals(registerPage.getRegisterSuccessMessage(), "Your registration completed");
 
 		registerPage.clickToLogoutLink();
 		

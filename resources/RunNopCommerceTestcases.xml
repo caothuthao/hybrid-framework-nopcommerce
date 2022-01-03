@@ -6,7 +6,7 @@
   <test name="Run on FIREFOX">
   	<parameter name ="browser" value ="firefox"></parameter>
     <classes>
-      <class name="com.nopcommerce.user.Level_05_Page_Factory"/>
+      <class name="com.nopcommerce.user.Level_06_Page_Generator_Manager_Part_I"/>
     </classes>
   </test>
 

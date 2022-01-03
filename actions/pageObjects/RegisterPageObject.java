@@ -67,14 +67,15 @@ public class RegisterPageObject extends BasePage {
 		sendkeyToElementByJS(driver, RegisterPageUI.CONFIRM_PASSWORD_TEXTBOX, confirmPassword);
 	}
 
-	public String getEmailSuccessMessage() {
+	public String getRegisterSuccessMessage() {
 		waitForElementVisible(driver, RegisterPageUI.REGISTER_SUCCESS_MESSAGE);
 		return getElementText(driver, RegisterPageUI.REGISTER_SUCCESS_MESSAGE);
 	}
 
-	public void clickToLogoutLink() {
+	public HomePageObject clickToLogoutLink() {
 		waitForElementVisible(driver, RegisterPageUI.LOGOUT_LINK);
 		clickToElementByJS(driver, RegisterPageUI.LOGOUT_LINK);
+		return PageGeneratorManager.getHomePage(driver);
 	}
 
 	public String getExistedEmailMessage() {
