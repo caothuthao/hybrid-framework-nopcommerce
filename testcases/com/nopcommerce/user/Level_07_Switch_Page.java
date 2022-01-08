@@ -10,19 +10,26 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
+import pageObjects.AddressPageObject;
 import pageObjects.CustomerInforPageObject;
 import pageObjects.HomePageObject;
 import pageObjects.LoginPageObject;
+import pageObjects.OrdersPageObject;
 import pageObjects.PageGeneratorManager;
 import pageObjects.RegisterPageObject;
+import pageObjects.RewardPointPageObject;
 
-public class Level_06_Page_Generator_Manager_Part_III extends BaseTest {
+public class Level_07_Switch_Page extends BaseTest {
 	private WebDriver driver;
 	
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
 	private LoginPageObject loginPage;
 	private CustomerInforPageObject customerInforPage;
+	private OrdersPageObject ordersPage;
+	private AddressPageObject addressPage;
+	private RewardPointPageObject rewardPointPage;
+	
 		
 	private String firstName, lastName, emailAddress, password;
 
@@ -31,7 +38,7 @@ public class Level_06_Page_Generator_Manager_Part_III extends BaseTest {
 	public void beforeClass(String browserName, String urlValue) {
 		// 1 - Mở url ra --> mở ra trang Home Page (Business Page)
 		driver = getBrowserDriver(browserName, urlValue);
-
+		
 		homePage = PageGeneratorManager.getHomePage(driver);
 		
 		firstName = "Cao";
@@ -80,10 +87,31 @@ public class Level_06_Page_Generator_Manager_Part_III extends BaseTest {
 		Assert.assertEquals(customerInforPage.getLastNameTextboxValue(), lastName);
 		Assert.assertEquals(customerInforPage.getEmailTextboxValue(), emailAddress);
 	}
+	
+	@Test
+	public void TC_04_Switch_Page() {
+		// Customer Infor Page -> Orders Page
+		ordersPage = customerInforPage.openOrdersPage(driver);
+		
+		// Orders -> Reward Page
+		rewardPointPage = ordersPage.openRewardPointPage(driver);
+		
+		// Reward -> Order
+		ordersPage = rewardPointPage.openOrdersPage(driver);
+		
+		// Order -> Customer Infor
+		customerInforPage = ordersPage.openCustomerInforPage(driver);
+		
+		// Customer Infor -> Address Page
+		addressPage = customerInforPage.openAddressPage(driver);
+		
+		// Address Page -> Order page
+		ordersPage = addressPage.openOrdersPage(driver);
+	}
 
 	@AfterClass
 	public void afterClass() {
-		driver.quit();
+//		driver.quit();
 	}
 	
 	public String generateRandomEmail() {
