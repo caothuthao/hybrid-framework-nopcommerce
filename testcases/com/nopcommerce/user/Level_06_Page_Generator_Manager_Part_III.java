@@ -10,19 +10,19 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
-import pageObjects.CustomerInforPageObject;
-import pageObjects.HomePageObject;
-import pageObjects.LoginPageObject;
-import pageObjects.PageGeneratorManager;
-import pageObjects.RegisterPageObject;
+import commons.PageGeneratorManager;
+import pageObjects.user.UserCustomerInforPageObject;
+import pageObjects.user.UserHomePageObject;
+import pageObjects.user.UserLoginPageObject;
+import pageObjects.user.UserRegisterPageObject;
 
 public class Level_06_Page_Generator_Manager_Part_III extends BaseTest {
 	private WebDriver driver;
 	
-	private HomePageObject homePage;
-	private RegisterPageObject registerPage;
-	private LoginPageObject loginPage;
-	private CustomerInforPageObject customerInforPage;
+	private UserHomePageObject homePage;
+	private UserRegisterPageObject registerPage;
+	private UserLoginPageObject loginPage;
+	private UserCustomerInforPageObject customerInforPage;
 		
 	private String firstName, lastName, emailAddress, password;
 
@@ -32,7 +32,7 @@ public class Level_06_Page_Generator_Manager_Part_III extends BaseTest {
 		// 1 - Mở url ra --> mở ra trang Home Page (Business Page)
 		driver = getBrowserDriver(browserName, urlValue);
 
-		homePage = PageGeneratorManager.getHomePage(driver);
+		homePage = PageGeneratorManager.getUserHomePage(driver);
 		
 		firstName = "Cao";
 		lastName = "Thu Thao";
@@ -64,8 +64,8 @@ public class Level_06_Page_Generator_Manager_Part_III extends BaseTest {
 		// 4 - Từ trang HomePage chuyển qua Login Page
 		loginPage = homePage.clickToLoginLink();
 		
-		loginPage.sendKeyToEmailTextBox(emailAddress);
-		loginPage.sendKeyToPasswordTextBox(password);
+		loginPage.inputToEmailTextBox(emailAddress);
+		loginPage.inputToPasswordTextBox(password);
 		
 		// 5 - Từ trang Login Page chuyển qua Home Page
 		homePage = loginPage.clickToLoginButton();

@@ -10,25 +10,25 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
-import pageObjects.AddressPageObject;
-import pageObjects.CustomerInforPageObject;
-import pageObjects.HomePageObject;
-import pageObjects.LoginPageObject;
-import pageObjects.OrdersPageObject;
-import pageObjects.PageGeneratorManager;
-import pageObjects.RegisterPageObject;
-import pageObjects.RewardPointPageObject;
+import commons.PageGeneratorManager;
+import pageObjects.user.UserAddressPageObject;
+import pageObjects.user.UserCustomerInforPageObject;
+import pageObjects.user.UserHomePageObject;
+import pageObjects.user.UserLoginPageObject;
+import pageObjects.user.UserOrdersPageObject;
+import pageObjects.user.UserRegisterPageObject;
+import pageObjects.user.UserRewardPointPageObject;
 
 public class Level_07_Switch_Page extends BaseTest {
 	private WebDriver driver;
 	
-	private HomePageObject homePage;
-	private RegisterPageObject registerPage;
-	private LoginPageObject loginPage;
-	private CustomerInforPageObject customerInforPage;
-	private OrdersPageObject ordersPage;
-	private AddressPageObject addressPage;
-	private RewardPointPageObject rewardPointPage;
+	private UserHomePageObject homePage;
+	private UserRegisterPageObject registerPage;
+	private UserLoginPageObject loginPage;
+	private UserCustomerInforPageObject customerInforPage;
+	private UserOrdersPageObject ordersPage;
+	private UserAddressPageObject addressPage;
+	private UserRewardPointPageObject rewardPointPage;
 	
 		
 	private String firstName, lastName, emailAddress, password;
@@ -39,7 +39,7 @@ public class Level_07_Switch_Page extends BaseTest {
 		// 1 - Mở url ra --> mở ra trang Home Page (Business Page)
 		driver = getBrowserDriver(browserName, urlValue);
 		
-		homePage = PageGeneratorManager.getHomePage(driver);
+		homePage = PageGeneratorManager.getUserHomePage(driver);
 		
 		firstName = "Cao";
 		lastName = "Thu Thao";
@@ -71,8 +71,8 @@ public class Level_07_Switch_Page extends BaseTest {
 		// 4 - Từ trang HomePage chuyển qua Login Page
 		loginPage = homePage.clickToLoginLink();
 		
-		loginPage.sendKeyToEmailTextBox(emailAddress);
-		loginPage.sendKeyToPasswordTextBox(password);
+		loginPage.inputToEmailTextBox(emailAddress);
+		loginPage.inputToPasswordTextBox(password);
 		
 		// 5 - Từ trang Login Page chuyển qua Home Page
 		homePage = loginPage.clickToLoginButton();
@@ -111,7 +111,7 @@ public class Level_07_Switch_Page extends BaseTest {
 
 	@AfterClass
 	public void afterClass() {
-//		driver.quit();
+		driver.quit();
 	}
 	
 	public String generateRandomEmail() {

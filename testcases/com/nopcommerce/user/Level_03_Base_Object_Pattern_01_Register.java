@@ -13,14 +13,14 @@ import org.testng.annotations.Test;
 
 import commons.BasePage;
 import commons.BaseTest;
-import pageObjects.HomePageObject;
-import pageObjects.RegisterPageObject;
+import pageObjects.user.UserHomePageObject;
+import pageObjects.user.UserRegisterPageObject;
 
 public class Level_03_Base_Object_Pattern_01_Register extends BaseTest {
 	private WebDriver driver;
 	
-	private HomePageObject homePage;
-	private RegisterPageObject registerPage;
+	private UserHomePageObject homePage;
+	private UserRegisterPageObject registerPage;
 	
 	String projectPath = System.getProperty("user.dir");
 	
@@ -39,14 +39,14 @@ public class Level_03_Base_Object_Pattern_01_Register extends BaseTest {
 		driver.get("https://demo.nopcommerce.com/");
 		
 		// Khởi tạo page lên
-		homePage = new HomePageObject(driver);
+		homePage = new UserHomePageObject(driver);
 	}
 
 	@Test
 	public void TC_01_Register_Empty_Data() {
 		// 2 - Từ Home Page click vào Register link mở ra trang Register Page (Business Page)
 		homePage.clickToRegisterLink();
-		registerPage = new RegisterPageObject(driver);
+		registerPage = new UserRegisterPageObject(driver);
 		
 		registerPage.clickToRegisterButton();
 		
@@ -61,7 +61,7 @@ public class Level_03_Base_Object_Pattern_01_Register extends BaseTest {
 	@Test
 	public void TC_02_Register_Invalid_Email() {
 		homePage.clickToRegisterLink();
-		registerPage = new RegisterPageObject(driver);
+		registerPage = new UserRegisterPageObject(driver);
 		
 		registerPage.sendKeyToFirstNameTextBox("Cao");
 		registerPage.sendKeyToLastNameTextBox("Thu Thao");
@@ -77,7 +77,7 @@ public class Level_03_Base_Object_Pattern_01_Register extends BaseTest {
 	@Test
 	public void TC_03_Register_Success() {
 		homePage.clickToRegisterLink();
-		registerPage = new RegisterPageObject(driver);
+		registerPage = new UserRegisterPageObject(driver);
 		
 		registerPage.sendKeyToFirstNameTextBox("Cao");
 		registerPage.sendKeyToLastNameTextBox("Thu Thao");
@@ -92,13 +92,13 @@ public class Level_03_Base_Object_Pattern_01_Register extends BaseTest {
 		registerPage.clickToLogoutLink();
 		
 		// 3 - Từ trang Register --> Home Page
-		homePage = new HomePageObject(driver);
+		homePage = new UserHomePageObject(driver);
 	}
 
 	@Test
 	public void TC_04_Register_Existing_Email() {
 		homePage.clickToRegisterLink();
-		registerPage = new RegisterPageObject(driver);
+		registerPage = new UserRegisterPageObject(driver);
 		
 		registerPage.sendKeyToFirstNameTextBox("Automation");
 		registerPage.sendKeyToLastNameTextBox("FC");
@@ -114,7 +114,7 @@ public class Level_03_Base_Object_Pattern_01_Register extends BaseTest {
 	@Test
 	public void TC_05_Register_Password_Less_Than_6_Chars() {
 		homePage.clickToRegisterLink();
-		registerPage = new RegisterPageObject(driver);
+		registerPage = new UserRegisterPageObject(driver);
 		
 		registerPage.sendKeyToFirstNameTextBox("Automation");
 		registerPage.sendKeyToLastNameTextBox("FC");
@@ -130,7 +130,7 @@ public class Level_03_Base_Object_Pattern_01_Register extends BaseTest {
 	@Test
 	public void TC_06_Register_Invalid_Confirm_Password() {
 		homePage.clickToRegisterLink();
-		registerPage = new RegisterPageObject(driver);
+		registerPage = new UserRegisterPageObject(driver);
 		
 		registerPage.sendKeyToFirstNameTextBox("Automation");
 		registerPage.sendKeyToLastNameTextBox("FC");

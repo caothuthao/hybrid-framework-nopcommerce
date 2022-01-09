@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="NopCommerce" parallel="false">
+
+	<parameter name ="url" value ="https://admin-demo.nopcommerce.com" />
+
+  <test name="Run on FIREFOX">
+  	<parameter name ="browser" value ="firefox"></parameter>
+    <classes>
+      <class name="com.nopcommerce.user.Level_08_Switch_Role_Admin"/>
+    </classes>
+  </test>
+
+ <!--  <test name="Run on CHROME">
+  	<parameter name ="browser" value ="chrome"></parameter>
+    <classes>
+      <class name="com.nopcommerce.user.Level_04_Multiple_Browser"/>
+    </classes>
+  </test>
+  
+  <test name="Run on EDGE">
+  	<parameter name ="browser" value ="edge"></parameter>
+    <classes>
+      <class name="com.nopcommerce.user.Level_04_Multiple_Browser"/>
+    </classes>
+  </test>  -->
+  
+</suite> 
