@@ -1,3 +1,13 @@
 /bin/
 
 /test-output/
+
+/.classpath
+
+.idea/
+
+.settings/
+
+*.iml
+
+/*.project
